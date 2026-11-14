@@ -3,13 +3,20 @@ package store
 import (
 	"time"
 	"database/sql"
+	_ "golang.org/x/crypto/bcrypt"
 )
+
+type password struct{
+	plainText *string
+	hash []byte
+}
+
 
 type User struct {
 	ID int `json:"id"`
 	Username string `json:"username"`
 	Email string `json:"email"`
-	Password string `json:"password"`
+	PasswordHash password`json:"-"`
 	Bio string `json:"bio"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
